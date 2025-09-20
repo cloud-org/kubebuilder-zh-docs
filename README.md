@@ -1,18 +1,44 @@
-# Running mdBook
+# Kubebuilder Documentation
 
-The kubebuilder book is served using [mdBook](https://github.com/rust-lang-nursery/mdBook). If you want to test changes to the book locally, follow these directions:
+This is the Chinese translation of the Kubebuilder project documentation, based on the [official documentation](https://github.com/kubernetes-sigs/kubebuilder).
 
-1. Follow the instructions at [https://rust-lang.github.io/mdBook/guide/installation.html](https://rust-lang.github.io/mdBook/guide/installation.html) to
-   install mdBook.
-2. Make sure [controller-gen](https://pkg.go.dev/sigs.k8s.io/controller-tools/cmd/controller-gen) is installed in `$GOPATH`.
-3. cd into the `docs/book` directory
-4. Run `mdbook serve`
-5. Visit [http://localhost:3000](http://localhost:3000)
+## Translation Base
 
-# Steps to deploy
+This translation is based on the following commit:
+- **Source commit**: `3fd04199acb4556376dc17a7393bfd43bcd40c26`
 
-There are no manual steps needed to deploy the website.
+## Local Development
 
-Kubebuilder book website is deployed on Netlify.
-There is a preview of the website for each PR.
-As soon as the PR is merged, the website will be built and deployed on Netlify.
+### Quick Start
+
+```bash
+# Build and start local server
+./book/install-and-build.sh build
+cd book && mdbook serve
+
+# Visit http://localhost:3000
+```
+
+### Manual Installation (Optional)
+
+If you need to install dependencies manually:
+
+1. Install [mdBook](https://rust-lang.github.io/mdBook/guide/installation.html)
+2. Make sure [controller-gen](https://pkg.go.dev/sigs.k8s.io/controller-tools/cmd/controller-gen) is installed
+3. Run `mdbook serve`
+
+## Deployment
+
+### Automatic Deployment
+
+Pushing to `main` branch will automatically trigger GitHub Actions deployment to Cloudflare Pages.
+
+### Manual Deployment
+
+```bash
+# Required environment variables:
+# CLOUDFLARE_API_TOKEN
+# CLOUDFLARE_ACCOUNT_ID
+
+./deploy-cloudflare.sh
+```
