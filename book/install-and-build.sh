@@ -28,7 +28,7 @@ if [[ -n "$(command -v gimme)" ]]; then
     eval "$(gimme $GO_VERSION)"
 fi
 echo go version
-GOBIN=$THIS_DIR/functions go install ./...
+(cd "$THIS_DIR/utils" && GOBIN=$THIS_DIR/functions go install ./...)
 
 os=$(go env GOOS)
 arch=$(go env GOARCH)
@@ -67,15 +67,15 @@ esac
 
 # grab mdbook
 # we hardcode linux/amd64 since rust uses a different naming scheme and it's a pain to tran
-# MDBOOK_VERSION="v0.4.40"
-# MDBOOK_BASENAME="mdBook-${MDBOOK_VERSION}-${arch}-${target}"
-# MDBOOK_URL="https://github.com/rust-lang/mdBook/releases/download/${MDBOOK_VERSION}/${MDBOOK_BASENAME}.${ext}"
+MDBOOK_VERSION="v0.4.40"
+MDBOOK_BASENAME="mdBook-${MDBOOK_VERSION}-${arch}-${target}"
+MDBOOK_URL="https://github.com/rust-lang/mdBook/releases/download/${MDBOOK_VERSION}/${MDBOOK_BASENAME}.${ext}"
 
-# echo "downloading ${MDBOOK_BASENAME}.${ext} from ${MDBOOK_URL}"
-# set -x
-# curl -fL -o /tmp/mdbook.${ext} "${MDBOOK_URL}"
-# ${cmd} /tmp/mdbook.${ext}
-# chmod +x /tmp/mdbook
+echo "downloading ${MDBOOK_BASENAME}.${ext} from ${MDBOOK_URL}"
+set -x
+curl -fL -o /tmp/mdbook.${ext} "${MDBOOK_URL}"
+${cmd} /tmp/mdbook.${ext}
+chmod +x /tmp/mdbook
 
 CONTROLLER_GEN_VERSION="v0.19.0"
 
