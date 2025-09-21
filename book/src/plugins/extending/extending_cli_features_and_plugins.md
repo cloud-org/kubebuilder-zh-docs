@@ -85,7 +85,59 @@ Kubebuilder 内置插件通过模板生成代码文件。例如 `go/v4` 在初�
 示例：`go/v4` 通过实现 machinery 接口对象来脚手架生成 `go.mod`，其原始模板在 `Template.SetTemplateDefaults` 的 `TemplateBody` 字段中定义：
 
 ```go
-{{#include ./../../../../../pkg/plugins/golang/v4/scaffolds/internal/templates/gomod.go}}
+/*
+Copyright 2022 The Kubernetes Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+package templates
+
+import (
+	"sigs.k8s.io/kubebuilder/v4/pkg/machinery"
+)
+
+var _ machinery.Template = &GoMod{}
+
+// GoMod scaffolds a file that defines the project dependencies
+type GoMod struct {
+	machinery.TemplateMixin
+	machinery.RepositoryMixin
+
+	ControllerRuntimeVersion string
+}
+
+// SetTemplateDefaults implements machinery.Template
+func (f *GoMod) SetTemplateDefaults() error {
+	if f.Path == "" {
+		f.Path = "go.mod"
+	}
+
+	f.TemplateBody = goModTemplate
+
+	f.IfExistsAction = machinery.OverwriteFile
+
+	return nil
+}
+
+const goModTemplate = `module {{ .Repo }}
+
+go 1.24.5
+
+require (
+	sigs.k8s.io/controller-runtime {{ .ControllerRuntimeVersion }}
+)
+`
 ```
 
 随后，该对象会被传入脚手架执行：
