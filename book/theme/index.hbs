@@ -17,9 +17,36 @@
         {{> head}}
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        {{#if description}}
         <meta name="description" content="{{ description }}">
+        {{else}}
+        <meta name="description" content="Kubebuilder 中文文档：从入门到进阶的完整指南，涵盖架构、插件、Webhook、API 设计与多版本迁移等。">
+        {{/if}}
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="{{ book_title }}">
+        <meta property="og:title" content="{{ title }}">
+        {{#if description}}
+        <meta property="og:description" content="{{ description }}">
+        {{else}}
+        <meta property="og:description" content="Kubebuilder 中文文档：从入门到进阶的完整指南，涵盖架构、插件、Webhook、API 设计与多版本迁移等。">
+        {{/if}}
+        <meta property="og:locale" content="{{ language }}">
+        <meta property="og:image" content="{{ path_to_root }}/logos/logo-single-line.png">
+        <meta property="og:image:alt" content="{{ book_title }}">
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="{{ title }}">
+        {{#if description}}
+        <meta name="twitter:description" content="{{ description }}">
+        {{else}}
+        <meta name="twitter:description" content="Kubebuilder 中文文档：从入门到进阶的完整指南，涵盖架构、插件、Webhook、API 设计与多版本迁移等。">
+        {{/if}}
+        <meta name="twitter:image" content="{{ path_to_root }}/logos/logo-single-line.png">
 
         <link rel="shortcut icon" href="{{ path_to_root }}/logos/favicon.png">
         <link rel="stylesheet" href="{{ path_to_root }}css/variables.css">
