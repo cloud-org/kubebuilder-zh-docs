@@ -95,4 +95,6 @@ verb=${1:-build}
 if [[ ${verb} == "build" ]]; then
     echo "Generating sitemap.xml..."
     ./generate-sitemap.sh
+    echo "create robots.txt"
+    cp ./static/robots.txt ./book/robots.txt
 fi

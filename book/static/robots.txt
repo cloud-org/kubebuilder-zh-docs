@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://kubebuilder-zh.vibecodinghub.org/sitemap.xml
+
+# Allow all crawlers to access the documentation
+# This is a public documentation site for Kubebuilder Chinese translation
