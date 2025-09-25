@@ -2,7 +2,7 @@
 authors = ["The Kubebuilder Maintainers"]
 multilingual = false
 src = "src"
-title = "The Kubebuilder Book"
+title = "The Kubebuilder Book(简体中文)"
 
 [output.html]
 smart-punctuation = true
