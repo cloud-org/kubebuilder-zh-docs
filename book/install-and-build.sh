@@ -90,3 +90,11 @@ gobin=${GOBIN:-$(go env GOPATH)/bin} # GOBIN won't always be set :-/
 export PATH=${gobin}:$PATH
 verb=${1:-build}
 /tmp/mdbook ${verb}
+
+# Generate sitemap after building
+if [[ ${verb} == "build" ]]; then
+    echo "Generating sitemap.xml..."
+    ./generate-sitemap.sh
+    echo "create robots.txt"
+    cp ./static/robots.txt ./book/robots.txt
+fi
